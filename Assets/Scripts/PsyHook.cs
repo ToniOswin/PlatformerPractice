@@ -15,15 +15,12 @@ public class PsyHook : MonoBehaviour
     int maxPoints;
     Rigidbody2D rb;
     List<Vector2> points = new List<Vector2> (); 
-
-    // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         lineRend.positionCount = 0;
     }
 
-    // Update is called once per frame
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Mouse0))
@@ -57,12 +54,10 @@ public class PsyHook : MonoBehaviour
                 lineRend.SetPosition(n + 1, points[j]);
             }
         }
-
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
             Detatch();
         }
-
     }
 
     void Detatch()

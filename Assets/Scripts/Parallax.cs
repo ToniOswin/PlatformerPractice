@@ -19,8 +19,6 @@ public class Parallax : MonoBehaviour
         Texture2D texture = sprite.texture;
         textureUnitSizeX = texture.width / sprite.pixelsPerUnit;
     }
-
-    // Update is called once per frame
     void Update()
     {
         Vector3 deltaMovement = cameraTransform.position - lastcameraPosition;

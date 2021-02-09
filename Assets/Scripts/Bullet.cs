@@ -5,7 +5,6 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public float speed = 2;
-    public float Range = 3;
     // Start is called before the first frame update
     private void OnEnable()
     {
@@ -17,7 +16,7 @@ public class Bullet : MonoBehaviour
     {
         transform.Translate(Vector2.left * Time.deltaTime * speed);
     }
-
+   
     IEnumerator destroy()
     {
         yield return new WaitForSeconds(1);

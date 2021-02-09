@@ -12,7 +12,7 @@ public class enemieShoot : MonoBehaviour
     public List<GameObject> pooledObjects;
     public GameObject objectToPool;
     public int amountToPool;
-    // Start is called before the first frame update
+
     void Start()
     {
         pooledObjects = new List<GameObject>();
@@ -26,36 +26,25 @@ public class enemieShoot : MonoBehaviour
 
         StartCoroutine(Shoot());
     }
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-
     public GameObject GetPooledObject()
     {
-        // For as many objects as are in the pooledObjects list
         for (int i = 0; i < pooledObjects.Count; i++)
         {
-            // if the pooled objects is NOT active, return that object 
             if (!pooledObjects[i].activeInHierarchy)
             {
                 return pooledObjects[i];
             }
         }
-        // otherwise, return null   
         return null;
     }
 
     IEnumerator Shoot()
     {
-        
         GameObject pooledProjectile = GetPooledObject();
         if (pooledProjectile != null)
         {
-            pooledProjectile.SetActive(true); // activate it
-            pooledProjectile.transform.position = transform.position; // position it at player
+            pooledProjectile.SetActive(true); 
+            pooledProjectile.transform.position = transform.position; 
         }
         shootAnimator.SetTrigger("Shoot");
         yield return new WaitForSeconds(2);
