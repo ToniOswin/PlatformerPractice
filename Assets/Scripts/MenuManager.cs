@@ -45,4 +45,8 @@ public class MenuManager : MonoBehaviour
         levelsCan.gameObject.SetActive(false);
         menuCan.gameObject.SetActive(true);
     }
+    public void Exit()
+    {
+        Application.Quit();
+    }
 }
