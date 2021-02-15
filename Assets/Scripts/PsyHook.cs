@@ -14,23 +14,31 @@ public class PsyHook : MonoBehaviour
     [SerializeField]
     int maxPoints;
     Rigidbody2D rb;
-    List<Vector2> points = new List<Vector2> (); 
+    List<Vector2> points = new List<Vector2> ();
+
+    [SerializeField]
+    AudioSource _audioSource;
+
+    public bool isAtached;
+    GameObject ActualHook;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         lineRend.positionCount = 0;
+        isAtached = false;
     }
 
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Mouse0))
-        {
+        {           
             Vector2 mousePos = mainCamera.ScreenToWorldPoint(Input.mousePosition);
             Vector2 direction = (mousePos - (Vector2)transform.position).normalized;
 
             RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, psyLenght, stickyMask);
             if(hit.collider != null)
             {
+                _audioSource.Play();
                 Vector2 hitPoint = hit.point;
                 points.Add(hitPoint);
                 if(points.Count > maxPoints)
@@ -42,6 +50,7 @@ public class PsyHook : MonoBehaviour
 
         if (points.Count > 0)
         {
+            isAtached = true;
             Vector2 moveTo = Centroid(points.ToArray());
 
             rb.MovePosition(Vector2.MoveTowards(transform.position, moveTo, Time.deltaTime * moveSpeed));
@@ -56,12 +65,14 @@ public class PsyHook : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
+            _audioSource.Stop();
             Detatch();
         }
     }
 
     void Detatch()
     {
+        isAtached = false;
         lineRend.positionCount = 0;
         points.Clear();
     }

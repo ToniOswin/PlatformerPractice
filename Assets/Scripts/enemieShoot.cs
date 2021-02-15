@@ -8,6 +8,8 @@ public class enemieShoot : MonoBehaviour
     GameObject proyectilePrefab;
     [SerializeField]
     Animator shootAnimator;
+    [SerializeField]
+    AudioSource shootSound;
 
     public List<GameObject> pooledObjects;
     public GameObject objectToPool;
@@ -40,6 +42,7 @@ public class enemieShoot : MonoBehaviour
 
     IEnumerator Shoot()
     {
+        shootSound.Play();
         GameObject pooledProjectile = GetPooledObject();
         if (pooledProjectile != null)
         {

@@ -12,6 +12,14 @@ public class Character : MonoBehaviour
     Animator playerAnimator;
     [SerializeField]
     SpriteRenderer SpRenderer;
+    [SerializeField]
+    AudioClip jumpSound;
+    [SerializeField]
+    AudioSource _audioSource;
+
+    [SerializeField]
+    GameManager gameMan;
+    PsyHook psyScript;
 
 
     Rigidbody2D Rb;
@@ -22,53 +30,43 @@ public class Character : MonoBehaviour
     [SerializeField]
     float checkGroundRadius;
     public LayerMask WhatISground;
-    float jumpTimeCounter;
-    [SerializeField]
-    float jumpTime;
-    bool isJumping;
     void Start()
     {
         Rb = gameObject.GetComponent<Rigidbody2D>();
+        psyScript = gameObject.GetComponent<PsyHook>();
     }
 
     void Update()
     {
         isOnGround = Physics2D.OverlapCircle(checkGroundPos.position, checkGroundRadius, WhatISground);
-        float horizontalInput = Input.GetAxisRaw("Horizontal");
-        Vector2 direction = new Vector2(horizontalInput,Rb.velocity.y).normalized;
+        float horizontalInput = Input.GetAxis("Horizontal");
+        //Vector2 direction = new Vector2(horizontalInput,Rb.velocity.y).normalized;
 
         //flip de sprite
-        if(horizontalInput < 0) { SpRenderer.flipX = true; } else { SpRenderer.flipX = false; }
+        if (horizontalInput < 0) { SpRenderer.flipX = true; } else { SpRenderer.flipX = false; }
         if (isOnGround) { playerAnimator.SetBool("IsOnAir", false); } else { playerAnimator.SetBool("IsOnAir", true); }
-        if(direction.x != 0f && isOnGround) { playerAnimator.SetBool("IsMoving", true); } else { playerAnimator.SetBool("IsMoving", false); }
+        if(horizontalInput != 0f && isOnGround) { playerAnimator.SetBool("IsMoving", true); } else { playerAnimator.SetBool("IsMoving", false); }
 
         //move
-        if (direction.magnitude >= 0.1f)
+        if(psyScript.isAtached == false)
         {
-            gameObject.transform.Translate(direction * speed * Time.deltaTime);
+            transform.position += new Vector3(horizontalInput, 0, 0) * speed * Time.deltaTime;
         }
-        //jump
-        jump();
+        Jump();
+
+        if(transform.position.y <= -1)
+        {
+            gameMan.Die();
+        }
     }
 
-    void jump()
+    void Jump()
     {
-        if (isOnGround && Input.GetKeyDown(KeyCode.Space))
+        if(isOnGround && Input.GetKeyDown(KeyCode.Space))
         {
-            Rb.AddForce(Vector2.up * jumpVelocity * Time.deltaTime);
-            isJumping = true;
-            jumpTimeCounter = jumpTime;
+            _audioSource.clip = jumpSound;
+            _audioSource.Play();
+            Rb.AddForce(new Vector2(0, jumpVelocity), ForceMode2D.Impulse);
         }
-
-        if (Input.GetKey(KeyCode.Space) && isJumping)
-        {
-            if (jumpTimeCounter > 0)
-            {
-                Rb.AddForce(Vector2.up * jumpVelocity, ForceMode2D.Impulse);
-                jumpTimeCounter -= Time.deltaTime;
-            }
-            else { isJumping = false; }
-        }
-        if (Input.GetKeyUp(KeyCode.Space)) { isJumping = false; }
     }
 }

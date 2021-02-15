@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7051324585334413578}
   - component: {fileID: 7051324585334413577}
   - component: {fileID: 7051324585334413582}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: city_enemy1_0
   m_TagString: enemy
   m_Icon: {fileID: 0}
@@ -158,7 +158,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7051324585364954563}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: LimitLeft
   m_TagString: limit
   m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
@@ -188,7 +188,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7051324585584721142}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: LimitRight
   m_TagString: limit
   m_Icon: {fileID: 1206586993520771344, guid: 0000000000000000d000000000000000, type: 0}
