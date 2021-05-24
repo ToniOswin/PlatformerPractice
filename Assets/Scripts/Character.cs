@@ -40,7 +40,6 @@ public class Character : MonoBehaviour
     {
         isOnGround = Physics2D.OverlapCircle(checkGroundPos.position, checkGroundRadius, WhatISground);
         float horizontalInput = Input.GetAxis("Horizontal");
-        //Vector2 direction = new Vector2(horizontalInput,Rb.velocity.y).normalized;
 
         //flip de sprite
         if (horizontalInput < 0) { SpRenderer.flipX = true; } else { SpRenderer.flipX = false; }

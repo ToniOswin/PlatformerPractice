@@ -52,7 +52,7 @@ public class PsyHook : MonoBehaviour
         {
             isAtached = true;
             Vector2 moveTo = Centroid(points.ToArray());
-
+            GetComponent<Character>().enabled = false;
             rb.MovePosition(Vector2.MoveTowards(transform.position, moveTo, Time.deltaTime * moveSpeed));
 
             lineRend.positionCount = 0;
@@ -65,6 +65,7 @@ public class PsyHook : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
+            GetComponent<Character>().enabled = true;
             _audioSource.Stop();
             Detatch();
         }
@@ -76,6 +77,7 @@ public class PsyHook : MonoBehaviour
         lineRend.positionCount = 0;
         points.Clear();
     }
+
     Vector2 Centroid(Vector2[] points)
     {
         Vector2 center = Vector2.zero;

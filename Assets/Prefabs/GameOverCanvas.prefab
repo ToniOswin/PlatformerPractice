@@ -677,7 +677,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Waht you wanna do?
+  m_text: What you wanna do?
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5fbb617d88d33d845958f1201857c4e3, type: 2}
   m_sharedMaterial: {fileID: 7258510636226036290, guid: 5fbb617d88d33d845958f1201857c4e3, type: 2}

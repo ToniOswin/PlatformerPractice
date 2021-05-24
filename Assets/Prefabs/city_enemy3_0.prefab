@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4291533549158661525}
   - component: {fileID: 4291533549158661526}
   - component: {fileID: 4291533549158661527}
+  - component: {fileID: 9169519064117088800}
   - component: {fileID: 4291533549158661524}
   - component: {fileID: 1425404516872484721}
   - component: {fileID: 4910749158341662237}
@@ -105,6 +106,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &9169519064117088800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4291533549158661520}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0b165373686034cbcb4e9767b86d0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shootS: {fileID: 4291533549158661524}
 --- !u!114 &4291533549158661524
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117,6 +131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7a024a7398ff4b4bbe62e91edc01e3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deathSound: {fileID: 8300000, guid: c8cdc44d7ed7763498ba48703f89e555, type: 3}
   proyectilePrefab: {fileID: 2704403138280182112, guid: db92e07e252ca91498ae06b8847d3582, type: 3}
   shootAnimator: {fileID: 4291533549158661527}
   shootSound: {fileID: 4910749158341662237}

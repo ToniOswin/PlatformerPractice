@@ -6,8 +6,8 @@ using TMPro;
 public class PlayerStats : MonoBehaviour
 {
     public int lifes;
-    public int maxLifes = 10;
-    public int points;
+    const int maxLifes = 10;
+    int points;
 
     [SerializeField]
     GameManager gameMan;
@@ -40,16 +40,14 @@ public class PlayerStats : MonoBehaviour
     AudioSource _audioSource;
 
 
-    // Start is called before the first frame update
     void Start()
     {
         lifes = maxLifes;
-        points = PlayerPrefs.GetInt("Points", 0);
-        pointsText.text = "X " + points;
+        Coin.pointCount = PlayerPrefs.GetInt("Points", 0);
+        pointsText.text = "X " + Coin.pointCount;
         gameMan.setMaxHealth(maxLifes);
     }
 
-    // Update is called once per frame
     void Update()
     {
         isOnEnemie = Physics2D.OverlapCircle(checkGroundPos.position, checkGroundRadius, StepInEnemie);
@@ -80,8 +78,8 @@ public class PlayerStats : MonoBehaviour
     {
         _audioSource.clip = pointSound;
         _audioSource.Play();
-        points++;
-        pointsText.text = "X " + points;
+        Coin coin = new Coin();
+        pointsText.text = "X " + Coin.pointCount;
     }
     private void OnCollisionEnter2D(Collision2D other)
     {
@@ -91,9 +89,7 @@ public class PlayerStats : MonoBehaviour
         }
         else if(other.gameObject.CompareTag("enemy") && isOnEnemie)
         {
-            _audioSource.clip = enemieDeath;
-            _audioSource.Play();
-            Destroy(other.gameObject);
+            other.gameObject.GetComponent<Enemy>().Die(_audioSource);
         }
         else if (other.gameObject.CompareTag("Bullet"))
         {
@@ -109,7 +105,7 @@ public class PlayerStats : MonoBehaviour
         {
             
            UnlockLevel(level);
-            PlayerPrefs.SetInt("Points", points);
+            PlayerPrefs.SetInt("Points", Coin.pointCount);
             if (level != 3)
             {
                 gameMan.NextLevel(nextLevel);
@@ -131,8 +127,6 @@ public class PlayerStats : MonoBehaviour
         }
         else if(other.gameObject.CompareTag("StickyCol"))
         {
-            Debug.Log("lo detecta");
-            //other.gameObject.GetComponentInParent<CircleCollider2D>().enabled = false;
             other.gameObject.transform.parent.gameObject.GetComponent<CircleCollider2D>().enabled = false;
         }
     }
@@ -140,7 +134,6 @@ public class PlayerStats : MonoBehaviour
     {
         if (other.gameObject.CompareTag("StickyCol"))
         {
-            //Debug.Log("lo detecta again");
             other.gameObject.transform.parent.gameObject.GetComponent<CircleCollider2D>().enabled = true; ;
         }
     }

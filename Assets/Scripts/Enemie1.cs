@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemie1 : MonoBehaviour
+public class Enemie1 : Enemy
 {
     [SerializeField]
     Transform[] limitPositions;
@@ -13,6 +13,7 @@ public class Enemie1 : MonoBehaviour
 
     Transform nextPos;
     int nextPosIdx;
+
     void Start()
     {
         nextPos = limitPositions[0];
@@ -26,6 +27,8 @@ public class Enemie1 : MonoBehaviour
         moveEnemie();
 
     }
+
+
     void moveEnemie()
     {
         if (transform.position == nextPos.position)

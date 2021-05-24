@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class enemieShoot : MonoBehaviour
+public class enemieShoot : Enemy
 {
     [SerializeField]
     GameObject proyectilePrefab;
@@ -51,6 +51,15 @@ public class enemieShoot : MonoBehaviour
         }
         shootAnimator.SetTrigger("Shoot");
         yield return new WaitForSeconds(2);
+        StartCoroutine(Shoot());
+    }
+
+    private void OnDisable()
+    {
+        StopAllCoroutines();
+    }
+    private void OnEnable()
+    {
         StartCoroutine(Shoot());
     }
 }
